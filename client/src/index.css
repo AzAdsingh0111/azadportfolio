@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --neon-cyan: #00f0ff;
+  --neon-purple: #9d4edd;
+  --neon-pink: #f72585;
+  --neon-amber: #ffd166;
+  --neon-emerald: #10b981;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: #080c14;
+  color: #f8fafc;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+code, kbd, samp, pre {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-panel-purple {
+  background: rgba(24, 15, 42, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(157, 78, 221, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(157, 78, 221, 0.2);
+}
+
+.glass-panel-amber {
+  background: rgba(35, 25, 10, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 209, 102, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(255, 209, 102, 0.2);
+}
+
+.glass-panel-emerald {
+  background: rgba(10, 35, 25, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  box-shadow: 0 8px 32px 0 rgba(16, 185, 129, 0.25);
+}
+
+/* Cyber Glows */
+.glow-cyan {
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.5), inset 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.glow-purple {
+  box-shadow: 0 0 15px rgba(157, 78, 221, 0.5), inset 0 0 10px rgba(157, 78, 221, 0.2);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.6), inset 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.7);
+}
+
+.text-glow-purple {
+  text-shadow: 0 0 8px rgba(157, 78, 221, 0.7);
+}
+
+.text-glow-gold {
+  text-shadow: 0 0 8px rgba(255, 209, 102, 0.7);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(8, 12, 20, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.4);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 240, 255, 0.8);
+}
+
+/* Cyber Grid Lines */
+.cyber-grid {
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Scanline Effect */
+.scanline {
+  position: relative;
+}
+.scanline::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Pulsing Badge Indicator */
+@keyframes beaconPulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.animate-beacon {
+  animation: beaconPulse 2s infinite ease-in-out;
+}

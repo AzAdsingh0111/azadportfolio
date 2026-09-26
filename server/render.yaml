@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: web3-car-portfolio-backend
+    env: python
+    region: oregon
+    plan: free
+    rootDir: server
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0
+      - key: ALLOWED_ORIGINS
+        value: "*"
+      - key: SERVER_PRIVATE_KEY
+        generateValue: true
