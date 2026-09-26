@@ -3,8 +3,8 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { soundManager } from '../../utils/audio';
 
-// Keyboard control state
-const keys = {
+// Keyboard & Touch control state
+export const activeKeys = {
   forward: false,
   backward: false,
   left: false,
@@ -13,12 +13,19 @@ const keys = {
   boost: false,
 };
 
+export const setVirtualKey = (keyName, isPressed) => {
+  if (keyName in activeKeys) {
+    activeKeys[keyName] = isPressed;
+  }
+};
+
 export function Car({ 
   onCarUpdate, 
   onDriftScore, 
   cameraMode = 'chase', 
   teleportTarget = null,
-  onTeleportComplete = () => {}
+  onTeleportComplete = () => {},
+  isAutoTour = false
 }) {
   const carGroup = useRef();
   const frontLeftWheel = useRef();
@@ -100,14 +107,21 @@ export function Car({
     const ACCEL = 35.0;
     const BOOST_ACCEL = 65.0;
     const BRAKE_DECEL = 45.0;
+    const isForward = keys.forward || activeKeys.forward;
+    const isBackward = keys.backward || activeKeys.backward;
+    const isLeft = keys.left || activeKeys.left;
+    const isRight = keys.right || activeKeys.right;
+    const isHandbraking = keys.brake || activeKeys.brake;
+    const isBoosting = keys.boost || activeKeys.boost;
+
     const FRICTION = 0.985;
-    const MAX_SPEED = keys.boost && carState.nitro > 0 ? 55.0 : 38.0;
+    const MAX_SPEED = isBoosting && carState.nitro > 0 ? 55.0 : 38.0;
     const MAX_REVERSE = -14.0;
     const STEER_SPEED = 2.4;
     const MAX_STEER = 0.55;
 
     // Nitro consumption
-    if (keys.boost && keys.forward && carState.nitro > 0) {
+    if (isBoosting && isForward && carState.nitro > 0) {
       carState.nitro = Math.max(0, carState.nitro - dt * 25);
       soundManager.playNitroBoost();
     } else {
@@ -115,10 +129,10 @@ export function Car({
     }
 
     // Forward / Backward thrust
-    const currentAccel = (keys.boost && carState.nitro > 0) ? BOOST_ACCEL : ACCEL;
-    if (keys.forward) {
+    const currentAccel = (isBoosting && carState.nitro > 0) ? BOOST_ACCEL : ACCEL;
+    if (isForward) {
       carState.speed += currentAccel * dt;
-    } else if (keys.backward) {
+    } else if (isBackward) {
       if (carState.speed > 0) {
         carState.speed -= BRAKE_DECEL * dt;
       } else {
@@ -129,7 +143,6 @@ export function Car({
     }
 
     // Handbrake Drifting
-    const isHandbraking = keys.brake;
     if (isHandbraking) {
       carState.speed *= 0.96;
       if (Math.abs(carState.speed) > 10 && Math.abs(carState.steerAngle) > 0.15) {
@@ -148,7 +161,7 @@ export function Car({
     carState.speed = THREE.MathUtils.clamp(carState.speed, MAX_REVERSE, MAX_SPEED);
 
     // Steering
-    const targetSteer = keys.left ? MAX_STEER : keys.right ? -MAX_STEER : 0;
+    const targetSteer = isLeft ? MAX_STEER : isRight ? -MAX_STEER : 0;
     carState.steerAngle = THREE.MathUtils.lerp(carState.steerAngle, targetSteer, STEER_SPEED * dt * 4);
 
     // Apply rotation based on speed and steer angle

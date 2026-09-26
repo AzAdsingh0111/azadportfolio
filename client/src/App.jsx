@@ -158,6 +158,12 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [carData.pos, activeModal]);
 
+  // Reset car position
+  const handleResetCar = () => {
+    soundManager.playNitroBoost();
+    setTeleportTarget({ x: 0, z: -40 });
+  };
+
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-[#050811]">
       
@@ -199,6 +205,7 @@ export default function App() {
         collectedSkills={collectedSkills}
         onOpenModal={(modal) => setActiveModal(modal)}
         onFastTravel={handleFastTravel}
+        onResetCar={handleResetCar}
       />
 
       {/* 5 Interactive Landmark Modals */}
