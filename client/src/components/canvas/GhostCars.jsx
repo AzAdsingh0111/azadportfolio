@@ -81,41 +81,47 @@ export function GhostCars({ myCarPos, myCarRot, myWallet }) {
   useEffect(() => {
     let ws;
     try {
-      ws = new WebSocket('ws://localhost:8000/ws/multiplayer');
-      socketRef.current = ws;
+      // Determine WebSocket URL safely
+      const wsUrl = import.meta.env.VITE_WS_URL || (typeof window !== 'undefined' && window.location.protocol === 'http:' ? 'ws://localhost:8000/ws/multiplayer' : null);
+      if (wsUrl) {
+        ws = new WebSocket(wsUrl);
+        socketRef.current = ws;
 
-      ws.onopen = () => {
-        ws.send(JSON.stringify({
-          type: 'join',
-          wallet: myWallet || '0xExplorerGuest'
-        }));
-      };
+        ws.onopen = () => {
+          ws.send(JSON.stringify({
+            type: 'join',
+            wallet: myWallet || '0xExplorerGuest'
+          }));
+        };
 
-      ws.onmessage = (event) => {
-        try {
-          const msg = JSON.parse(event.data);
-          if (msg.type === 'playerMoved') {
-            setRemotePlayers(prev => ({
-              ...prev,
-              [msg.id]: msg
-            }));
-          } else if (msg.type === 'playerLeft') {
-            setRemotePlayers(prev => {
-              const updated = { ...prev };
-              delete updated[msg.id];
-              return updated;
-            });
-          } else if (msg.type === 'currentPlayers') {
-            setRemotePlayers(msg.players || {});
-          }
-        } catch (e) {}
-      };
+        ws.onmessage = (event) => {
+          try {
+            const msg = JSON.parse(event.data);
+            if (msg.type === 'playerMoved') {
+              setRemotePlayers(prev => ({
+                ...prev,
+                [msg.id]: msg
+              }));
+            } else if (msg.type === 'playerLeft') {
+              setRemotePlayers(prev => {
+                const updated = { ...prev };
+                delete updated[msg.id];
+                return updated;
+              });
+            } else if (msg.type === 'currentPlayers') {
+              setRemotePlayers(msg.players || {});
+            }
+          } catch (e) {}
+        };
 
-      ws.onerror = () => {};
+        ws.onerror = () => {};
+      }
     } catch (e) {}
 
     return () => {
-      if (ws) ws.close();
+      if (ws) {
+        try { ws.close(); } catch(e) {}
+      }
     };
   }, [myWallet]);
 

@@ -51,15 +51,15 @@ export function Car({
     const handleKeyDown = (e) => {
       soundManager.init(); // Initialize audio on first user gesture
       const key = e.key.toLowerCase();
-      if (key === 'w' || key === 'arrowup') keys.forward = true;
-      if (key === 's' || key === 'arrowdown') keys.backward = true;
-      if (key === 'a' || key === 'arrowleft') keys.left = true;
-      if (key === 'd' || key === 'arrowright') keys.right = true;
+      if (key === 'w' || key === 'arrowup') activeKeys.forward = true;
+      if (key === 's' || key === 'arrowdown') activeKeys.backward = true;
+      if (key === 'a' || key === 'arrowleft') activeKeys.left = true;
+      if (key === 'd' || key === 'arrowright') activeKeys.right = true;
       if (key === ' ' || key === 'space') {
-        keys.brake = true;
+        activeKeys.brake = true;
         e.preventDefault();
       }
-      if (key === 'shift') keys.boost = true;
+      if (key === 'shift') activeKeys.boost = true;
       if (key === 'r') {
         // Reset Car
         carState.pos.set(0, 0.4, -40);
@@ -71,12 +71,12 @@ export function Car({
 
     const handleKeyUp = (e) => {
       const key = e.key.toLowerCase();
-      if (key === 'w' || key === 'arrowup') keys.forward = false;
-      if (key === 's' || key === 'arrowdown') keys.backward = false;
-      if (key === 'a' || key === 'arrowleft') keys.left = false;
-      if (key === 'd' || key === 'arrowright') keys.right = false;
-      if (key === ' ' || key === 'space') keys.brake = false;
-      if (key === 'shift') keys.boost = false;
+      if (key === 'w' || key === 'arrowup') activeKeys.forward = false;
+      if (key === 's' || key === 'arrowdown') activeKeys.backward = false;
+      if (key === 'a' || key === 'arrowleft') activeKeys.left = false;
+      if (key === 'd' || key === 'arrowright') activeKeys.right = false;
+      if (key === ' ' || key === 'space') activeKeys.brake = false;
+      if (key === 'shift') activeKeys.boost = false;
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -107,12 +107,12 @@ export function Car({
     const ACCEL = 35.0;
     const BOOST_ACCEL = 65.0;
     const BRAKE_DECEL = 45.0;
-    const isForward = keys.forward || activeKeys.forward;
-    const isBackward = keys.backward || activeKeys.backward;
-    const isLeft = keys.left || activeKeys.left;
-    const isRight = keys.right || activeKeys.right;
-    const isHandbraking = keys.brake || activeKeys.brake;
-    const isBoosting = keys.boost || activeKeys.boost;
+    const isForward = activeKeys.forward;
+    const isBackward = activeKeys.backward;
+    const isLeft = activeKeys.left;
+    const isRight = activeKeys.right;
+    const isHandbraking = activeKeys.brake;
+    const isBoosting = activeKeys.boost;
 
     const FRICTION = 0.985;
     const MAX_SPEED = isBoosting && carState.nitro > 0 ? 55.0 : 38.0;
@@ -193,7 +193,7 @@ export function Car({
 
     // Audio Update
     const speedKmH = Math.round(carState.speed * 3.6);
-    soundManager.updateEngine(speedKmH, keys.forward, keys.backward || keys.brake);
+    soundManager.updateEngine(speedKmH, activeKeys.forward, activeKeys.backward || activeKeys.brake);
 
     // Camera Modes
     if (cameraMode === 'chase') {
@@ -300,11 +300,11 @@ export function Car({
       {/* Twin Rear LED Taillights (intensifies when braking) */}
       <mesh position={[-0.7, 0.5, -2.1]}>
         <boxGeometry args={[0.35, 0.1, 0.05]} />
-        <meshBasicMaterial color={keys.brake || keys.backward ? '#ff0055' : '#ef4444'} />
+        <meshBasicMaterial color={activeKeys.brake || activeKeys.backward ? '#ff0055' : '#ef4444'} />
       </mesh>
       <mesh position={[0.7, 0.5, -2.1]}>
         <boxGeometry args={[0.35, 0.1, 0.05]} />
-        <meshBasicMaterial color={keys.brake || keys.backward ? '#ff0055' : '#ef4444'} />
+        <meshBasicMaterial color={activeKeys.brake || activeKeys.backward ? '#ff0055' : '#ef4444'} />
       </mesh>
 
       {/* Cyber Underglow Light */}

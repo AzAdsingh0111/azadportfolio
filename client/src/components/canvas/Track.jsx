@@ -32,8 +32,8 @@ export function Track() {
     // Create road ribbon
     const roadVertices = [];
     const roadIndices = [];
-    const curbLeftVerts = [];
-    const curbRightVerts = [];
+    const curbLeftPoints = [];
+    const curbRightPoints = [];
     const ROAD_WIDTH = 12;
 
     for (let i = 0; i < points.length; i++) {
@@ -48,9 +48,8 @@ export function Track() {
       roadVertices.push(pLeft.x, 0.05, pLeft.z);
       roadVertices.push(pRight.x, 0.05, pRight.z);
 
-      // Curbs
-      curbLeftVerts.push(pLeft.x, 0.3, pLeft.z);
-      curbRightVerts.push(pRight.x, 0.3, pRight.z);
+      curbLeftPoints.push(new THREE.Vector3(pLeft.x, 0.25, pLeft.z));
+      curbRightPoints.push(new THREE.Vector3(pRight.x, 0.25, pRight.z));
 
       if (i < points.length - 1) {
         const i0 = i * 2;
@@ -63,24 +62,22 @@ export function Track() {
       }
     }
 
+    // Connect the last segment back to the first segment
+    const lastI = points.length - 1;
+    roadIndices.push(lastI * 2, lastI * 2 + 1, 0);
+    roadIndices.push(lastI * 2 + 1, 1, 0);
+
+    // Close the curb line loops
+    if (curbLeftPoints.length > 0) curbLeftPoints.push(curbLeftPoints[0].clone());
+    if (curbRightPoints.length > 0) curbRightPoints.push(curbRightPoints[0].clone());
+
     const road = new THREE.BufferGeometry();
     road.setAttribute('position', new THREE.Float32BufferAttribute(roadVertices, 3));
     road.setIndex(roadIndices);
     road.computeVertexNormals();
 
-    const curbLeft = new THREE.BufferGeometry().setFromPoints(
-      curbLeftVerts.reduce((acc, _, idx, arr) => {
-        if (idx % 3 === 0) acc.push(new THREE.Vector3(arr[idx], arr[idx+1], arr[idx+2]));
-        return acc;
-      }, [])
-    );
-
-    const curbRight = new THREE.BufferGeometry().setFromPoints(
-      curbRightVerts.reduce((acc, _, idx, arr) => {
-        if (idx % 3 === 0) acc.push(new THREE.Vector3(arr[idx], arr[idx+1], arr[idx+2]));
-        return acc;
-      }, [])
-    );
+    const curbLeft = new THREE.BufferGeometry().setFromPoints(curbLeftPoints);
+    const curbRight = new THREE.BufferGeometry().setFromPoints(curbRightPoints);
 
     return { roadGeo: road, curbLeftGeo: curbLeft, curbRightGeo: curbRight };
   }, [curve]);
