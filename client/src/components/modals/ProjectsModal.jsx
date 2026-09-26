@@ -17,7 +17,7 @@ const PROJECTS = [
       'Awarded 4th place among hundreds of international competing teams at JNTUH Hyderabad'
     ],
     techStack: ['Python', 'FastAPI', 'C++', 'Data Visualization', 'React', 'Spatial Algorithms', 'Web3 Proofs'],
-    githubUrl: 'https://github.com/azadsingh/cartographer-bytex',
+    githubUrl: 'https://github.com/AzAdsingh0111',
     liveUrl: '#',
     architecture: 'Mobile/Web Client ──► FastAPI Vibe Engine ──► Spatial Clustering (C++) ──► Community Ledger'
   },
@@ -35,7 +35,7 @@ const PROJECTS = [
       'Integrated meeting summaries and cryptographic attendee verification'
     ],
     techStack: ['Java', 'SQL', 'WebSockets', 'React', 'Tailwind CSS', 'Docker'],
-    githubUrl: 'https://github.com/azadsingh/panel-room-system',
+    githubUrl: 'https://github.com/AzAdsingh0111',
     liveUrl: '#',
     architecture: 'React Conference UI ──► Java Backend Gateway ──► SQL Database + Redis Sync Cache'
   },
@@ -53,7 +53,7 @@ const PROJECTS = [
       'Robust roster presence management and offline message spooling'
     ],
     techStack: ['C++', 'Java', 'XMPP Protocol', 'TCP/IP Sockets', 'Concurrency', 'SQL'],
-    githubUrl: 'https://github.com/azadsingh/xmpp-realtime-server',
+    githubUrl: 'https://github.com/AzAdsingh0111',
     liveUrl: '#',
     architecture: 'Client XMPP Stanzas ──► TCP Socket Reactor ──► XML Parser ──► Routing Matrix'
   },
@@ -71,7 +71,7 @@ const PROJECTS = [
       'Pixel-perfect responsive cyberpunk glassmorphism design system'
     ],
     techStack: ['React', 'Three.js / R3F', 'Vite', 'Tailwind CSS', 'Wagmi / Ethers', 'Python FastAPI'],
-    githubUrl: 'https://github.com/azadsingh/web-development-showcase',
+    githubUrl: 'https://github.com/AzAdsingh0111',
     liveUrl: '#',
     architecture: 'React 18 + R3F ──► Web Audio API ──► FastAPI REST / WS ──► EVM Smart Contracts'
   }

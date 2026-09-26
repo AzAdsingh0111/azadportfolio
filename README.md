@@ -1,6 +1,6 @@
 # 3D Interactive Web3 Car Driving Portfolio & System Architecture
 
-[![Version](https://img.shields.io/badge/version-8.0.0-cyan.svg)](https://github.com/azadsingh)
+[![Version](https://img.shields.io/badge/version-8.5.0-cyan.svg)](https://github.com/AzAdsingh0111)
 [![EVM](https://img.shields.io/badge/EVM-Solidity%200.8.20-purple.svg)](https://soliditylang.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-Python%203.10%2B-emerald.svg)](https://fastapi.tiangolo.com/)
 [![React](https://img.shields.io/badge/React%2018-Three.js%20%2F%20R3F-blue.svg)](https://threejs.org/)

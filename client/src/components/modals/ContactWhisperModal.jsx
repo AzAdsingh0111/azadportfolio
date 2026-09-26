@@ -88,7 +88,7 @@ export function ContactWhisperModal({
         {/* Recruiter Quick Connect Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
           <a
-            href="mailto:contact@azadsingh.dev"
+            href="mailto:as91125267@gmail.com"
             className="p-4 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-pink-500/50 transition-all flex items-center gap-3 group"
           >
             <div className="p-2.5 rounded-lg bg-pink-500/20 text-pink-400 group-hover:scale-110 transition-transform">
@@ -96,12 +96,12 @@ export function ContactWhisperModal({
             </div>
             <div>
               <span className="text-[10px] font-mono text-slate-400 block uppercase">Email</span>
-              <span className="text-xs font-bold text-white group-hover:text-pink-300">azadsingh@dev</span>
+              <span className="text-xs font-bold text-white group-hover:text-pink-300 break-all">as91125267@gmail.com</span>
             </div>
           </a>
 
           <a
-            href="https://linkedin.com/in/azadsingh"
+            href="https://www.linkedin.com/in/azad-kumar01/"
             target="_blank"
             rel="noreferrer"
             className="p-4 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-cyan-500/50 transition-all flex items-center gap-3 group"
@@ -111,12 +111,12 @@ export function ContactWhisperModal({
             </div>
             <div>
               <span className="text-[10px] font-mono text-slate-400 block uppercase">LinkedIn</span>
-              <span className="text-xs font-bold text-white group-hover:text-cyan-300">Azad Singh</span>
+              <span className="text-xs font-bold text-white group-hover:text-cyan-300">azad-kumar01</span>
             </div>
           </a>
 
           <a
-            href="https://github.com/azadsingh"
+            href="https://github.com/AzAdsingh0111"
             target="_blank"
             rel="noreferrer"
             className="p-4 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-purple-500/50 transition-all flex items-center gap-3 group"
@@ -126,7 +126,7 @@ export function ContactWhisperModal({
             </div>
             <div>
               <span className="text-[10px] font-mono text-slate-400 block uppercase">GitHub</span>
-              <span className="text-xs font-bold text-white group-hover:text-purple-300">@azadsingh</span>
+              <span className="text-xs font-bold text-white group-hover:text-purple-300">@AzAdsingh0111</span>
             </div>
           </a>
         </div>
