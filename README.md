@@ -1,11 +1,14 @@
 # 3D Interactive Web3 Car Driving Portfolio & System Architecture
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-portfolioazad.vercel.app-00f0ff?style=for-the-badge&logo=vercel)](https://portfolioazad.vercel.app/)
 [![Version](https://img.shields.io/badge/version-8.5.0-cyan.svg)](https://github.com/AzAdsingh0111)
 [![EVM](https://img.shields.io/badge/EVM-Solidity%200.8.20-purple.svg)](https://soliditylang.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-Python%203.10%2B-emerald.svg)](https://fastapi.tiangolo.com/)
 [![React](https://img.shields.io/badge/React%2018-Three.js%20%2F%20R3F-blue.svg)](https://threejs.org/)
 
-An interactive 3D Web3 car driving portfolio application. Visitors navigate a virtual vehicle across a circuit track to explore academic milestones, software projects, and interactive skill arenas, featuring EVM smart contract verification, server-signed ECDSA badge claims, token-gated secret zones, and real-time multiplayer ghost cars.
+> 🌐 **Live Website:** [https://portfolioazad.vercel.app](https://portfolioazad.vercel.app)
+
+An interactive 3D Web3 car driving portfolio application. Visitors navigate a virtual vehicle across a circuit track to explore academic milestones, software projects, and interactive skill arenas, featuring EVM smart contract verification, server-signed ECDSA badge claims, token-gated secret zones, and real-time multiplayer ghost cars. Compatible with desktop keyboards and mobile touch controls.
 
 ---
 
